@@ -1,0 +1,53 @@
+.wordItemCard{
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  margin: 20px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 10px 12px rgba(0, 0, 0, 0.03);
+  padding: 20px 30px;
+  transition: .2s ease;
+}
+
+.mainWord{
+  font-size: 30px;
+  color: #37383a;
+  font-weight: bold;
+}
+
+.meaningWord{
+  font-size: 25px;
+  color: #868686;
+  font-weight: normal;
+  margin-top: 20px;
+  font-family: Vazirmatn;
+}
+
+.ltrWord{
+  text-align: left;
+  padding-right: 30px;
+}
+
+.rtlWord{
+  text-align: right;
+  padding-left: 30px;
+}
+
+.wordItemMenu{
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: .3s ease;
+  text-align: center;
+}
+
+.wordItemMenu:hover{
+  background: #efefef;
+}

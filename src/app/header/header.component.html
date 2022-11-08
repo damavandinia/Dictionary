@@ -1,0 +1,34 @@
+<div class="topHeader">
+  <img src="/assets/img/color-dictionary.svg" class="headerLogo" alt="Title">
+</div>
+<nav class="header">
+
+  <mat-form-field appearance="legacy" class="searchForm">
+    <mat-label>Search</mat-label>
+    <input matInput id="searchInput" placeholder="Type Something..." type="text" [(ngModel)]="filterTxt" (keyup)="searchWord()">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <div class="headerSelectorsWrapper">
+
+    <mat-form-field appearance="outline" class="headerSelect">
+      <mat-label>Sort By:</mat-label>
+      <mat-select [(value)]="sortType" (selectionChange)="searchWord()" >
+        <mat-option value="1">A to Z</mat-option>
+        <mat-option value="2">Z to A</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="headerSelect">
+      <mat-label>Filter By:</mat-label>
+      <mat-select [(value)]="filterType" (selectionChange)="searchWord()">
+        <mat-option *ngFor="let letter of alphabet" [value]="letter.value">
+          {{letter.viewValue}}
+        </mat-option>
+
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+</nav>

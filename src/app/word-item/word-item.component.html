@@ -1,0 +1,20 @@
+<div class="wordItemCard">
+  
+  <div class="mainWord ltrWord" id="mainWord">{{ word.englishWord }}</div>
+  <div class="meaningWord rtlWord" id="meaningWord">{{ word.persianWord }}</div>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="wordItemMenu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="editItem(i)">
+      <mat-icon color="accent">edit</mat-icon>
+      <span>Edit</span>
+    </button>
+    <button mat-menu-item (click)="deleteItem(i)">
+      <mat-icon color="accent">delete</mat-icon>
+      <span>Delete</span>
+    </button>
+  </mat-menu>
+
+</div>

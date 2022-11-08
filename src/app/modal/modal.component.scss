@@ -1,0 +1,67 @@
+.modalBackground{
+  position: fixed;
+  z-index: 900;
+  perspective: 2px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modalCard{
+  position: fixed;
+  z-index: 1000;
+  top: 30vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20vw;
+  padding: 30px;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-top: 50px;
+  transition: .6s;
+}
+
+.modalCard > h2{
+  color: #3949ab;
+  font-size: 22px;
+}
+
+.closeIc{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+}
+
+.modalBtn{
+  text-align: center;
+}
+
+.modalBtn > button{
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.meaningInput{
+  text-align: right;
+  direction: rtl;
+}
+
+
+@media screen and (max-width: 900px){
+
+  .modalCard{
+    width: 30vw;
+  }
+}
+
+@media screen and (max-width: 600px){
+
+  .modalCard{
+    width: auto;
+  }
+}

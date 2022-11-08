@@ -1,0 +1,64 @@
+.topHeader{
+  background: white;
+  z-index: 19;
+  padding-left: 30px;
+  padding-top: 20px;
+}
+
+.headerLogo{
+  width: 200px;
+}
+
+.header{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: white;
+  padding: 0 50px;
+  box-shadow: 0 20px 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.searchForm{
+  display: inline-block;
+  width: 40%;
+  font-size: 18px;
+}
+
+.headerSelectorsWrapper{
+  display: flex;
+  align-items: center;
+  align-self: center;
+  margin: 0 30%;
+}
+
+.headerSelect{
+  flex: 1;
+  margin: 0 20px;
+  font-size: 12px;
+  min-width: 80px;
+  max-width: 100%;
+}
+
+
+@media screen and (max-width: 750px){
+
+  .searchForm{
+    width: 60%;
+  }
+
+  .headerSelectorsWrapper{
+    margin: 0 10%;
+  }
+}
+
+@media screen and (max-width: 500px){
+
+  .searchForm{
+    width: 80%;
+  }
+
+  .headerSelectorsWrapper{
+    margin: 0 2%;
+  }
+}
