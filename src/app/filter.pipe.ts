@@ -54,10 +54,12 @@ export class FilterPipe implements PipeTransform {
       resultArray.sort((a,b) => (a.englishWord < b.englishWord) ? 1 : ((b.englishWord < a.englishWord) ? -1 : 0))
     }
 
-    if (resultArray.length === 0){
-      document.getElementById("emptyWrapper").classList.add("showEmpty");
-    }else {
-      document.getElementById("emptyWrapper").classList.remove("showEmpty");
+    if (document.getElementById("emptyWrapper")) {
+      if (resultArray.length === 0) {
+        document.getElementById("emptyWrapper").classList.add("showEmpty");
+      } else {
+        document.getElementById("emptyWrapper").classList.remove("showEmpty");
+      }
     }
     return resultArray;
   }
