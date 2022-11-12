@@ -1,9 +1,11 @@
 <app-header (filterTxtEmitter)="getFilterTxt($event)"></app-header>
-<div class="listWrapper">
+
+<div class="matIndicatorWrapper" *ngIf="showProgress"><mat-spinner class="matIndicator" diameter="80"></mat-spinner></div>
+<div class="listWrapper" *ngIf="!showProgress">
 
   <app-word-item *ngFor="let wordItem of words | filter:filterTxt:sortType:filterType;" [i]="wordItem.id" [word]="wordItem" [@listAnim]></app-word-item>
 
-  <div id="emptyWrapper" class="emptyWrapper">
+  <div id="emptyWrapper" class="emptyWrapper" *ngIf="!showProgress">
     <mat-icon>manage_search</mat-icon>
     <div>Nothing to show!</div>
   </div>
