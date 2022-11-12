@@ -26,18 +26,31 @@ export class WordItemComponent implements OnInit {
 
   deleteItem(id: number){
 
-    this.reservedItem = this.wordService.getWordItem(id);
-    this.wordService.deleteWord(id);
+    this.wordService.startProgress.next(null);
 
-    this.openSnackBar('Item was deleted.' , 'Undo');
+    this.reservedItem = this.wordService.getWordItem(id);
+
+    this.wordService.deleteWordFromServer(id).subscribe(response => {
+      this.openSnackBar('Item was deleted.' , 'Undo');
+      this.wordService.fetchWords();
+    } , error => {
+      this.wordService.serverError.next(error.error.error);
+    });
   }
 
   openSnackBar(message: string, action: string) {
     let mySnackBar: MatSnackBarRef<TextOnlySnackBar> = this._snackBar.open(message, action, {duration: 3000});
     mySnackBar.onAction().subscribe(() => {
 
-      this.wordService.addNewWord(this.reservedItem);
-      mySnackBar.dismiss();
+      this.wordService.startProgress.next(null);
+
+      this.wordService.addNewWordToServer(this.reservedItem).subscribe(response => {
+        mySnackBar.dismiss();
+        this.wordService.fetchWords();
+      } , error => {
+        this.wordService.serverError.next(error.error.error);
+      });
+
     });
     mySnackBar.afterDismissed().subscribe(() => {
       this.reservedItem = null;
