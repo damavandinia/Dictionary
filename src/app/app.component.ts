@@ -3,6 +3,7 @@ import {Word} from "./word-item/word.model";
 import {WordListService} from "./word-list.service";
 import {Subscription} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-root',
@@ -50,22 +51,28 @@ export class AppComponent implements OnInit, OnDestroy{
 
   private wordChangedSub: Subscription;
   private openEditModal: Subscription;
+  private serverError: Subscription;
+  private startProgress: Subscription;
   showModal = false;
   modalData: any;
 
   words: Word[];
   wordEditItem: Word;
 
+  showProgress = true;
+
   filterTxt = '';
   sortType = '1';
   filterType = 'All';
 
-  constructor(private wordService: WordListService) {}
+  constructor(private wordService: WordListService,
+              private _snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.words = this.wordService.getWords();
     this.wordChangedSub = this.wordService.wordsChanged.subscribe(
       (words: Word[]) => {
+        this.showProgress = false;
         this.words = words;
       }
     )
@@ -78,6 +85,21 @@ export class AppComponent implements OnInit, OnDestroy{
         this.showModal = true;
       }
     )
+
+    this.serverError = this.wordService.serverError.subscribe(
+      (errorMessage: string) => {
+        this.showProgress = false;
+        this._snackBar.open(errorMessage, null, {"duration": 4000});
+      }
+    )
+
+    this.startProgress = this.wordService.startProgress.subscribe(
+      () => {
+        this.showProgress = true;
+      }
+    )
+
+    this.wordService.fetchWords();
   }
 
   getFilterTxt(filterData: {text: string , sort: string , filter: string}) {
@@ -99,5 +121,7 @@ export class AppComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.wordChangedSub.unsubscribe();
     this.openEditModal.unsubscribe();
+    this.serverError.unsubscribe();
+    this.startProgress.unsubscribe();
   }
 }
