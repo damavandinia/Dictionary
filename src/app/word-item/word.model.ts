@@ -1,6 +1,6 @@
 export class Word {
 
-  public id: number;
+  public id?: number;
   public englishWord: string;
   public persianWord: string;
 
