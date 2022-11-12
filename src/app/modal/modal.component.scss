@@ -51,6 +51,26 @@
   direction: rtl;
 }
 
+.modalProgressWrapper{
+  margin-top: 20px;
+  text-align: center;
+  line-height: 25px;
+}
+
+.modalIndicator{
+  display: inline-block;
+  vertical-align: top;
+  height: 25px;
+  margin: 0 5px;
+}
+
+.modalProgressWrapper > p{
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #868686;
+}
+
 
 @media screen and (max-width: 900px){
 

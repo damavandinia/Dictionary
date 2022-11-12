@@ -44,4 +44,9 @@
 
   </form>
 
+  <div *ngIf="showModalProgress" class="modalProgressWrapper">
+    <mat-spinner class="modalIndicator" [diameter]="20" color="accent"></mat-spinner>
+    <p>Sending...</p>
+  </div>
+
 </div>

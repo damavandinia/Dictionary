@@ -20,6 +20,8 @@ export class ModalComponent implements OnInit, AfterViewChecked {
   @Input() modalData: any;
   @Output() close = new EventEmitter<void>();
 
+  showModalProgress = false;
+
   enWord = new FormControl('', [Validators.required]);
   prWord = new FormControl('', [Validators.required]);
 
@@ -40,24 +42,45 @@ export class ModalComponent implements OnInit, AfterViewChecked {
     const values = form.value;
     const wordItem = new Word(this.modalData.id, values.enWord, values.prWord);
 
+    this.showModalProgress = true;
+
     if (this.modalData.buttonTitle === 'Add'){
 
-      if (!this.wordService.addNewWord(wordItem)){
-
+      if (this.wordService.checkDuplicateWord(wordItem)){
         form.controls['enWord'].setErrors({required: true, incorrect: true});
         this.enWord.setErrors({required: true, incorrect: true});
-
         this.wordError = true;
-
+        this.showModalProgress = false;
         return;
       }
 
-    }else if (this.modalData.buttonTitle === 'Edit'){
-      this.wordService.editWord(this.modalData.id , wordItem);
-    }
+      this.wordService.addNewWordToServer(wordItem).subscribe(response => {
+        this.showModalProgress = false;
+        form.reset();
+        this.closeAndRefresh();
 
+      } , error => {
+        this.showModalProgress = false;
+        this.wordService.serverError.next(error.error.error);
+      });
+
+    }else if (this.modalData.buttonTitle === 'Edit'){
+
+      this.wordService.editWordOnServer(this.modalData.id , wordItem).subscribe(response => {
+        this.showModalProgress = false;
+        form.reset();
+        this.closeAndRefresh();
+
+      } , error => {
+        this.showModalProgress = false;
+        this.wordService.serverError.next(error.error.error);
+      });
+    }
+  }
+
+  closeAndRefresh(){
+    this.wordService.fetchWords();
     this.closeModal();
-    form.reset();
   }
 
   closeModal(){
