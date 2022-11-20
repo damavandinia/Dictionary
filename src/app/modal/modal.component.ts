@@ -61,10 +61,15 @@ export class ModalComponent implements OnInit, AfterViewChecked {
 
       } , error => {
         this.showModalProgress = false;
-        this.wordService.serverError.next(error.error.error);
+
+        if (!error.error || !error.error.error){
+          this.wordService.serverError.next('An unknown error occurred!');
+        }else {
+          this.wordService.serverError.next(error.error.error);
+        }
       });
 
-    }else if (this.modalData.buttonTitle === 'Edit'){
+    }else if (this.modalData.buttonTitle === 'Save'){
 
       this.wordService.editWordOnServer(this.modalData.id , wordItem).subscribe(response => {
         this.showModalProgress = false;
@@ -73,7 +78,11 @@ export class ModalComponent implements OnInit, AfterViewChecked {
 
       } , error => {
         this.showModalProgress = false;
-        this.wordService.serverError.next(error.error.error);
+        if (!error.error || !error.error.error){
+          this.wordService.serverError.next('An unknown error occurred!');
+        }else {
+          this.wordService.serverError.next(error.error.error);
+        }
       });
     }
   }

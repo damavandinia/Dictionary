@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Word} from "./word-item/word.model";
-import {Subject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {exhaustMap, Subject, take} from "rxjs";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
+import {AuthService} from "./auth/auth.service";
+import * as constants from "constants";
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +27,8 @@ export class WordListService {
     // {id: 8, englishWord: 'Pink', persianWord: 'صورتی'},
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private authService: AuthService) {}
 
   getWords(){
     return this.words.slice();
@@ -81,32 +84,39 @@ export class WordListService {
   fetchWords(){
     this.startProgress.next(null);
 
-    this.http.get<Word[]>('https://dictionary-90a42-default-rtdb.firebaseio.com/words.json')
-      .pipe(map(responseData => {
-        const resultArray = [];
-        for (const key in responseData){
-          if (responseData.hasOwnProperty(key)){
-            resultArray.push({...responseData[key] , id: key})
+    this.http.get<Word[]>('https://dictionary-90a42-default-rtdb.firebaseio.com/'+this.getUserId()+'/words.json')
+      .pipe(
+        map(responseData => {
+          const resultArray = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              resultArray.push({...responseData[key], id: key})
+            }
           }
+          return resultArray;
+        }))
+      .subscribe(words => {
+          this.setWords(words);
+        }, error => {
+          this.serverError.next(error.error.error);
         }
-        return resultArray;
-      }))
-      .subscribe(words =>{
-        this.setWords(words);
-      } , error => {
-        this.serverError.next(error.error.error);
-      });
+      );
   }
 
   addNewWordToServer(word: Word){
-    return this.http.post('https://dictionary-90a42-default-rtdb.firebaseio.com/words/.json' , word);
+    return this.http.post('https://dictionary-90a42-default-rtdb.firebaseio.com/'+this.getUserId()+'/words/.json' , word);
   }
 
   editWordOnServer(id: number , editedWord: Word){
-    return this.http.patch('https://dictionary-90a42-default-rtdb.firebaseio.com/words/'+id+'/.json' , editedWord);
+    return this.http.patch('https://dictionary-90a42-default-rtdb.firebaseio.com/'+this.getUserId()+'/words/'+id+'/.json' , editedWord);
   }
 
   deleteWordFromServer(id: number){
-    return this.http.delete('https://dictionary-90a42-default-rtdb.firebaseio.com/words/'+id+'/.json');
+    return this.http.delete('https://dictionary-90a42-default-rtdb.firebaseio.com/'+this.getUserId()+'/words/'+id+'/.json');
+  }
+
+  getUserId(){
+    if (!this.authService.user.value){return null;}
+    return this.authService.user.value.id;
   }
 }
