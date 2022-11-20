@@ -1,0 +1,44 @@
+.listWrapper{
+  padding: 50px 5% 50px 5%;
+  text-align: center;
+}
+
+.addBtn{
+  position: fixed;
+  z-index: 100;
+  bottom: 50px;
+  right: 50px;
+}
+
+.emptyWrapper{
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: .2s;
+}
+
+.emptyWrapper > mat-icon{
+  font-size: 100px;
+  width: 100px;
+  height: 100px;
+  overflow: visible;
+  color: #c5c5c5;
+}
+
+.showEmpty{
+  visibility: visible;
+  opacity: 1;
+  font-weight: bold;
+  font-size: 18px;
+  color: #838383;
+  margin-top: 15px;
+}
+
+.matIndicatorWrapper{
+  text-align: center;
+  margin-top: 30vh;
+}
+
+.matIndicator{
+  display: inline-block;
+}
