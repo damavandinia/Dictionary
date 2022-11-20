@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -41,13 +42,18 @@ export class HeaderComponent implements OnInit {
   ];
 
   @Output() filterTxtEmitter = new EventEmitter <{ text: string , sort: string , filter: string}> ();
+
   searchWord() {
     this.filterTxtEmitter.emit({text: this.filterTxt , sort: this.sortType , filter: this.filterType});
   }
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.authService.logout();
   }
 
 }
