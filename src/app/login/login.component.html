@@ -1,0 +1,55 @@
+<div class="loginBackground"></div>
+
+<div class="loginCard">
+
+  <h2 id="loginTitle" class="loginTitle">{{ title }}</h2>
+
+  <form (ngSubmit)="handleLoginForm(fLogin)" #fLogin="ngForm">
+    <mat-form-field appearance="legacy">
+      <mat-label>Email</mat-label>
+      <input matInput
+             type="email"
+             required
+             id="email"
+             name="email"
+             ngModel
+      >
+      <mat-error *ngIf="email.invalid">{{ getEmailInputError() }}</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>Password</mat-label>
+      <input matInput
+             type="password"
+             required
+             id="password"
+             name="password"
+             minlength="6"
+             ngModel
+      >
+      <mat-error *ngIf="password.invalid">{{ getPassInputError() }}</mat-error>
+    </mat-form-field>
+
+    <div class="modalBtn">
+      <button mat-raised-button
+              color="accent"
+              [disabled]="!fLogin.valid">{{ isLoginMode ? 'Login' : 'Sign Up' }}</button>
+    </div>
+
+  </form>
+
+
+  <div class="googleLoginBtn">
+    <button (click)="googleLogin()"><img src="/assets/ic/google.svg" class="googleIc"> {{ isLoginMode ? 'Login' : 'Sign Up' }} With Google Account</button>
+  </div>
+
+  <button (click)="switchMode()" class="loginSwitchBtn">Switch to: <span>{{ isLoginMode ? 'Sign Up' : 'Login' }}</span></button>
+
+  <div *ngIf="showModalProgress" class="modalProgressWrapper">
+    <mat-spinner class="modalIndicator" [diameter]="20" color="accent"></mat-spinner>
+    <p>Please Wait...</p>
+  </div>
+
+</div>
+
