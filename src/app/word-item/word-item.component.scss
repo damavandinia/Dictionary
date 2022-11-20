@@ -1,27 +1,35 @@
 .wordItemCard{
   position: relative;
-  display: inline-block;
-  vertical-align: top;
+  display: block;
   margin: 20px;
   border-radius: 12px;
   background: white;
   box-shadow: 0 10px 12px rgba(0, 0, 0, 0.03);
-  padding: 20px 30px;
+  padding: 25px 30px;
   transition: .2s ease;
 }
 
+.wordItemWrapper{
+  display: flex;
+  align-items: center;
+}
+
 .mainWord{
+  flex: 1;
   font-size: 30px;
   color: #37383a;
   font-weight: bold;
+  text-align: left;
 }
 
 .meaningWord{
+  flex: 1;
   font-size: 25px;
   color: #868686;
   font-weight: normal;
-  margin-top: 20px;
   font-family: Vazirmatn;
+  text-align: right;
+  margin-right: 30px;
 }
 
 .ltrWord{
@@ -50,4 +58,26 @@
 
 .wordItemMenu:hover{
   background: #efefef;
+}
+
+@media screen and (max-width: 400px){
+  .mainWord{
+    font-size: 25px;
+  }
+
+  .meaningWord{
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 300px){
+
+  .wordItemWrapper{
+    display: block;
+  }
+
+  .meaningWord{
+    margin-top: 10px;
+    margin-right: 10px;
+  }
 }
