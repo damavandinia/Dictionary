@@ -1,0 +1,114 @@
+@import '@angular/material/theming';
+
+@include mat-core();
+
+@mixin define-css-classes($theme) {
+  @include angular-material-theme($theme);
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .primaryTextColor{
+    color: mat-color($primary);
+  }
+
+  .accentTextColor{
+    color: mat-color($accent);
+  }
+
+  .cardBackgroundColor{
+    background: #ffffff;
+  }
+
+  .mainBackground{
+    background: #f1f1f1;
+  }
+
+  .titleColor{
+    color: #2a3031;
+  }
+}
+
+@mixin define-css-classes-dark($theme) {
+  @include angular-material-theme($theme);
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .primaryTextColor{
+    color: mat-color($primary, 300);
+  }
+
+  .accentTextColor{
+    color: mat-color($accent, 400);
+  }
+
+  .cardBackgroundColor{
+    background: #37383a;
+  }
+
+  .mainBackground{
+    background: #1f1f21;
+  }
+
+  .titleColor{
+    color: #ffffff;
+  }
+}
+
+/**
+* Define your custom themes in this map.
+* The `key` of each member is the name of CSS class for that theme.
+* To better understanding the schema of the map, see `@each` loop below and especially pay attention to
+* `map-has-key()` functions.
+*/
+$app-themes: (
+  indigo-pink : (primary-base: $mat-indigo, accent-base: $mat-pink),
+  deeppurple-amber: (primary-base: $mat-deep-purple, accent-base: $mat-amber),
+  pink-bluegrey : (primary-base: $mat-pink, accent-base: $mat-blue-gray),
+  purple-green : (primary-base: $mat-purple, accent-base: $mat-green),
+);
+
+@each $css-class, $theme in $app-themes {
+  $primary: if(map-has-key($theme, primary), map-get($theme, primary), mat-palette(map-get($theme, primary-base)));
+
+  $accent: if(map-has-key($theme, accent), map-get($theme, accent), mat-palette(map-get($theme, accent-base)));
+
+  $warn: if(map-has-key($theme, warn), map-get($theme, warn), mat-palette(
+      if(map-has-key($theme, warn-base), map-get($theme, warn-base), $mat-red)
+  ));
+
+  .#{$css-class} {
+    @include define-css-classes(mat-light-theme($primary, $accent, $warn));
+  }
+
+  $primary-dark: if(map-has-key($theme, primary), map-get($theme, primary), mat-palette(map-get($theme, primary-base), 300));
+
+  $accent-dark: if(map-has-key($theme, accent), map-get($theme, accent), mat-palette(map-get($theme, accent-base), 400));
+
+  $warn-dark: if(map-has-key($theme, warn), map-get($theme, warn), mat-palette(
+      if(map-has-key($theme, warn-base), map-get($theme, warn-base), $mat-red), 300
+  ));
+
+  .#{$css-class}-dark {
+    @include define-css-classes-dark(mat-dark-theme($primary-dark, $accent-dark, $warn-dark));
+  }
+
+  .theme-primary.#{$css-class} {
+    background-color: mat-color($primary);
+  }
+
+  .theme-accent.#{$css-class} {
+    background-color: mat-color($accent);
+  }
+
+  .theme-warn.#{$css-class} {
+    background-color: mat-color($warn);
+  }
+}
