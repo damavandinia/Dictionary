@@ -4,7 +4,9 @@
     public email: string,
     public id: string,
     private _token: string,
-    private _tokenExpirationDate: Date
+    private _tokenExpirationDate: Date,
+    public username?: string,
+    public avatar?: string,
   ) {}
 
    get token(){
@@ -14,5 +16,9 @@
     }
 
     return this._token;
+   }
+
+   set setUsername(newUsername: string){
+    this.username = newUsername;
    }
  }

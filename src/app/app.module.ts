@@ -22,6 +22,10 @@ import {DictionaryComponent} from "./dictionary/dictionary.component";
 import {AuthInterceptorService} from "./auth/auth-interceptor.service";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {ProfileComponent} from "./profile/profile.component";
+import {MatTableModule} from "@angular/material/table";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCazdiRoo9M2hfSRaSGgDZ3hghtYeRrM4M",
@@ -41,25 +45,30 @@ const firebaseConfig = {
     WordItemComponent,
     FilterPipe,
     ModalComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatIconModule,
-    MatSelectModule,
-    MatMenuModule,
-    FormsModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatSnackBarModule,
-    HttpClientModule,
-    MatProgressSpinnerModule,
-    AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatIconModule,
+        MatSelectModule,
+        MatMenuModule,
+        FormsModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        HttpClientModule,
+        MatProgressSpinnerModule,
+        AppRoutingModule,
+        AngularFireModule.initializeApp(firebaseConfig),
+        AngularFireAuthModule,
+        MatCheckboxModule,
+        MatSlideToggleModule,
+
+        MatTableModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

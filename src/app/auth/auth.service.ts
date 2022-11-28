@@ -54,17 +54,21 @@ export class AuthService{
   async loginWithGoogle(){
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
-    this.handleAuthentication(credential.user.email, credential.user.uid, credential.user.refreshToken, 3600);
+    this.handleAuthentication(credential.user.email, credential.user.uid, credential.user.refreshToken, 3600, credential.user.displayName, credential.user.photoURL);
+
+    localStorage.setItem('isGoogleLogin', JSON.stringify(true));
   }
 
-  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number){
+  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number, username?: string, avatar?: string){
 
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000 );
     const user = new UserModel(
       email,
       userId,
       token,
-      expirationDate
+      expirationDate,
+      username,
+      avatar
     );
     this.user.next(user);
 
@@ -98,6 +102,7 @@ export class AuthService{
     this.router.navigate(['/login']);
 
     localStorage.removeItem('userData');
+    localStorage.removeItem('isGoogleLogin');
   }
 
   autoLogin(){
@@ -122,5 +127,27 @@ export class AuthService{
     if (loadUser.token){
       this.user.next(loadUser);
     }
+  }
+
+  changePassword(newPassword: string){
+
+    const userData: {
+      email: string,
+      id: string,
+      _token: string,
+      _tokenExpirationDate: string
+    } = JSON.parse(localStorage.getItem('userData'));
+
+    if (!userData){
+      return;
+    }
+
+    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCazdiRoo9M2hfSRaSGgDZ3hghtYeRrM4M' ,
+      {
+        idToken: userData._token,
+        password: newPassword,
+        returnSecureToken: true
+      }
+    );
   }
 }

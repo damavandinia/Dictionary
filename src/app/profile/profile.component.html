@@ -1,0 +1,82 @@
+<div class="profileBack mainBackground">
+
+  <div class="profileFormsWrapper cardBackgroundColor">
+
+    <h2 class="profileTitle titleColor">Profile</h2>
+
+    <div class="userAvatarImgWrapper">
+      <img [src]="userAvatar" *ngIf="userAvatar" class="userAvatarImg">
+    </div>
+
+    <form (ngSubmit)="handleProfileForm(fProfile)" #fProfile="ngForm" class="titleColor">
+
+      <mat-form-field appearance="legacy">
+        <mat-label>Email</mat-label>
+        <input matInput
+               type="email"
+               required
+               id="email"
+               name="email"
+               ngModel
+               disabled
+               [ngModel]="userEmail"
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy">
+        <mat-label>Username</mat-label>
+        <input matInput
+               type="text"
+               required
+               id="usernameInput"
+               name="usernameInput"
+               ngModel
+               [ngModel]="userName"
+        >
+        <mat-error *ngIf="usernameInput.invalid">You must enter a value</mat-error>
+      </mat-form-field>
+
+      <div class="submitBtn">
+        <button mat-raised-button
+                color="accent"
+                [disabled]="!fProfile.valid">Update Profile
+        </button>
+      </div>
+
+    </form>
+
+    <div *ngIf="!isLoginWithGoogle">
+      <h2 class="changePassTitle titleColor">Change Password</h2>
+      <form (ngSubmit)="handlePassForm(fPass)" #fPass="ngForm" class="titleColor">
+
+        <mat-form-field appearance="legacy">
+          <mat-label>New Password</mat-label>
+          <input matInput
+                 type="password"
+                 required
+                 id="newPassword"
+                 name="newPassword"
+                 minlength="6"
+                 ngModel
+          >
+          <mat-error *ngIf="newPassword.invalid">{{ getPassInputError() }}</mat-error>
+        </mat-form-field>
+
+        <div class="submitBtn">
+          <button mat-raised-button
+                  color="accent"
+                  [disabled]="!fPass.valid">Update Password
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <div *ngIf="showProgress" class="modalProgressWrapper">
+      <mat-spinner class="modalIndicator" [diameter]="20" color="accent"></mat-spinner>
+      <p>Please Wait...</p>
+    </div>
+
+  </div>
+
+</div>

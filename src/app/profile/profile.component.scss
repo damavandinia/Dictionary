@@ -1,0 +1,85 @@
+.profileBack{
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.profileFormsWrapper{
+  z-index: 1000;
+  margin-top: 70vh;
+  margin-bottom: 50px;
+  margin-left: 50%;
+  transform: translateX(-50%) translateY(-50vh);
+  width: 250px;
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  transition: .6s;
+}
+
+.profileTitle{
+  font-size: 32px !important;
+  line-height: 50px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.mat-form-field{
+  display: block;
+}
+
+.changePassTitle{
+  margin-top: 40px;
+  margin-bottom: 5px;
+}
+
+.submitBtn{
+  text-align: center;
+  margin-top: 15px;
+}
+
+.modalProgressWrapper{
+  margin-top: 20px;
+  text-align: center;
+  line-height: 25px;
+}
+
+.modalIndicator{
+  display: inline-block;
+  vertical-align: top;
+  height: 25px;
+  margin: 0 5px;
+}
+
+.modalProgressWrapper > p{
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #868686;
+}
+
+.userAvatarImgWrapper{
+  text-align: center;
+}
+
+.userAvatarImg{
+  display: inline-block;
+  width: 90px;
+  height: 90px;
+  border-radius: 200px;
+  object-fit: cover;
+  background-size: cover;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 450px){
+
+  .loginCard{
+    width: auto;
+    min-width: auto;
+  }
+}
+
