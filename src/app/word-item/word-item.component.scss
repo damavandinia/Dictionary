@@ -60,13 +60,56 @@
   background: #efefef;
 }
 
-@media screen and (max-width: 400px){
+.tableTitle{
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.englishWord{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.persianWord{
+  text-align: right;
+  font-weight: normal;
+  font-family: Vazirmatn;
+  font-size: 16px;
+}
+
+.optionTitle{
+  text-align: right;
+  width: 100px;
+}
+
+.tableOptionWrapper{
+  text-align: right;
+  width: 100px;
+}
+
+@media screen and (max-width: 500px){
   .mainWord{
     font-size: 25px;
   }
 
   .meaningWord{
     font-size: 20px;
+  }
+
+  .optionTitle{
+    width: auto;
+  }
+
+  .tableOptionWrapper{
+    width: auto;
+  }
+
+  .englishWord{
+    font-size: 16px;
+  }
+
+  .persianWord{
+    font-size: 14px;
   }
 }
 

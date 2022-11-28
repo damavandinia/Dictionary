@@ -77,7 +77,7 @@ export class DictionaryComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     if (this.authService.user.value == null){
-      // this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
     }
 
     this.words = this.wordService.getWords();

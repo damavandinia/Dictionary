@@ -3,6 +3,7 @@ import {Word} from "./word.model";
 import {WordListService} from "../word-list.service";
 import {MatSnackBar, TextOnlySnackBar} from "@angular/material/snack-bar";
 import {MatSnackBarRef} from '@angular/material/snack-bar';
+import {DataSource} from "@angular/cdk/collections";
 
 @Component({
   selector: 'app-word-item',
@@ -11,9 +12,9 @@ import {MatSnackBarRef} from '@angular/material/snack-bar';
 })
 export class WordItemComponent implements OnInit {
 
-  @Input() word: Word;
-  @Input() i: number;
+  @Input() words: Word[];
   reservedItem: Word;
+  displayedColumns: string[] = ['no', 'word', 'meaning', 'option'];
 
   constructor(private wordService: WordListService,
               private _snackBar: MatSnackBar) {}

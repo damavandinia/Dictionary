@@ -23,28 +23,25 @@ export class FilterPipe implements PipeTransform {
       }
     }
 
-    if (!(filterString === '' && filterType === 'All')){
+    resultArray = [];
+    for (const item of value){
 
-      resultArray = [];
-      for (const item of value){
+      let addToList = true;
 
-        let addToList = true;
-
-        if (filterString !== ''){
-          if (item[propName].toLowerCase().search(filterString.toLowerCase()) < 0){
-            addToList = false;
-          }
+      if (filterString !== ''){
+        if (item[propName].toLowerCase().search(filterString.toLowerCase()) < 0){
+          addToList = false;
         }
+      }
 
-        if (filterType !== 'All'){
-          if (item['englishWord'].charAt(0).toUpperCase() !== filterType.toUpperCase()){
-            addToList = false;
-          }
+      if (filterType !== 'All'){
+        if (item['englishWord'].charAt(0).toUpperCase() !== filterType.toUpperCase()){
+          addToList = false;
         }
+      }
 
-        if (addToList){
-          resultArray.push(item);
-        }
+      if (addToList){
+        resultArray.push(item);
       }
     }
 
