@@ -1,10 +1,10 @@
-<div class="loginBackground"></div>
+<div class="loginBackground mainBackground"></div>
 
-<div class="loginCard">
+<div class="loginCard cardBackgroundColor">
 
-  <h2 id="loginTitle" class="loginTitle">{{ title }}</h2>
+  <h2 id="loginTitle" class="loginTitle primaryTextColor">{{ title }}</h2>
 
-  <form (ngSubmit)="handleLoginForm(fLogin)" #fLogin="ngForm">
+  <form (ngSubmit)="handleLoginForm(fLogin)" #fLogin="ngForm" class="titleColor">
     <mat-form-field appearance="legacy">
       <mat-label>Email</mat-label>
       <input matInput
@@ -44,7 +44,7 @@
     <button (click)="googleLogin()"><img src="/assets/ic/google.svg" class="googleIc"> {{ isLoginMode ? 'Login' : 'Sign Up' }} With Google Account</button>
   </div>
 
-  <button (click)="switchMode()" class="loginSwitchBtn">Switch to: <span>{{ isLoginMode ? 'Sign Up' : 'Login' }}</span></button>
+  <button (click)="switchMode()" class="loginSwitchBtn primaryTextColor">Switch to: <span class="accentTextColor">{{ isLoginMode ? 'Sign Up' : 'Login' }}</span></button>
 
   <div *ngIf="showModalProgress" class="modalProgressWrapper">
     <mat-spinner class="modalIndicator" [diameter]="20" color="accent"></mat-spinner>

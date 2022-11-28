@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       return 'You must enter a password';
     }
 
-    return this.email.hasError('minLength') ? 'Enter at least 6 characters' : '';
+    return this.password.hasError('minLength') ? 'Enter at least 6 characters' : '';
   }
 
   handleLoginForm(form: NgForm) {
