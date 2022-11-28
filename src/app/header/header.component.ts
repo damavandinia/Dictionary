@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from "../auth/auth.service";
+import {ThemeService} from "../theme.service";
+import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 
 @Component({
   selector: 'app-header',
@@ -41,15 +43,28 @@ export class HeaderComponent implements OnInit {
     {value: 'Z', viewValue: 'Z'}
   ];
 
+  isDarkTheme = false;
+
   @Output() filterTxtEmitter = new EventEmitter <{ text: string , sort: string , filter: string}> ();
 
   searchWord() {
     this.filterTxtEmitter.emit({text: this.filterTxt , sort: this.sortType , filter: this.filterType});
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private themeService: ThemeService) {
+
+    let isDark = JSON.parse(localStorage.getItem('isThemeDark'));
+    if (isDark){
+      this.isDarkTheme = isDark;
+    }
+  }
 
   ngOnInit(): void {
+  }
+
+  toggleDarkness(event: MatSlideToggleChange){
+    this.themeService.toggleDarkMode.next(event.checked);
   }
 
   logout(){

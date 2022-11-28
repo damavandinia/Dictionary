@@ -1,14 +1,38 @@
-<div class="topHeader">
-  <img src="/assets/img/color-dictionary.svg" class="headerLogo" alt="Title">
+<div class="topHeader cardBackgroundColor">
+  <img src="/assets/img/color-dictionary2.svg" class="headerLogo" alt="Title">
 
-  <button (click)="logout()" class="logOutBtn">Logout</button>
+  <button class="headerMenuBtn" mat-icon-button [matMenuTriggerFor]="headerMenu"
+           matTooltip="Select a theme!">
+    <mat-icon class="auto-flip" color="accent">menu</mat-icon>
+  </button>
+
+  <mat-menu #headerMenu="matMenu" style="padding: 15px; text-align: left; direction: ltr;">
+
+    <button mat-menu-item routerLink="/profile">
+      <mat-icon>account_circle</mat-icon>
+      <span>Profile</span>
+    </button>
+
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+
+    <button mat-menu-item >
+      <mat-icon>dark_mode</mat-icon>
+      <span>Dark Mode</span>
+      <mat-slide-toggle (change)="toggleDarkness($event)" [checked]="isDarkTheme" class="darkModeSwitch"></mat-slide-toggle>
+    </button>
+
+  </mat-menu>
+
 </div>
-<nav class="header">
+<nav class="header cardBackgroundColor">
 
-  <mat-form-field appearance="legacy" class="searchForm">
+  <mat-form-field appearance="legacy" class="searchForm titleColor">
     <mat-label>Search</mat-label>
     <input matInput id="searchInput" placeholder="Type Something..." type="text" [(ngModel)]="filterTxt" (keyup)="searchWord()">
-    <mat-icon matSuffix>search</mat-icon>
+    <mat-icon matSuffix color="primary">search</mat-icon>
   </mat-form-field>
 
   <div class="headerSelectorsWrapper">
