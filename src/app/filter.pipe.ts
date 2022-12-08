@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import {Subject} from "rxjs";
 
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(value: any, filterString: string, sortType: string, filterType: string): any {
+  transform(value: any, filterString: string, sortType: string, filterType: string, page, itemsToShow: number, filterSubject: Subject<number>): any {
 
     let resultArray = value;
     const regExp = /^[آ-ی]+$/i;
@@ -58,7 +59,8 @@ export class FilterPipe implements PipeTransform {
         document.getElementById("emptyWrapper").classList.remove("showEmpty");
       }
     }
-    return resultArray;
+    filterSubject.next(resultArray.length);
+    return [ ...resultArray.slice( itemsToShow*(page-1) , itemsToShow*(page) )]
   }
 
 }

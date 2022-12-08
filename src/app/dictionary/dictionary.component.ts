@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 
-import {Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Word} from "../word-item/word.model";
@@ -62,6 +62,12 @@ export class DictionaryComponent implements OnInit, OnDestroy {
 
   words: Word[];
   wordEditItem: Word;
+  page = 1;
+  pagination;
+  paginationActive = 1;
+  itemsToShow = 5;
+  currentListSize = 0;
+  filterSubject = new Subject<number>();
 
   showProgress = true;
 
@@ -69,22 +75,37 @@ export class DictionaryComponent implements OnInit, OnDestroy {
   sortType = '1';
   filterType = 'All';
 
+  newWordTitle = $localize `New Word`;
+  editWordTitle = $localize `Edit Word`;
+  addBtnTitle = $localize `Add`;
+  saveTitle = $localize `Save`;
+
   constructor(private wordService: WordListService,
               private _snackBar: MatSnackBar,
               private authService: AuthService,
-              private router: Router) {}
-
-  ngOnInit() {
+              private router: Router) {
 
     if (this.authService.user.value == null){
       this.router.navigate(['/login']);
     }
+  }
+
+  ngOnInit() {
 
     this.words = this.wordService.getWords();
     this.wordChangedSub = this.wordService.wordsChanged.subscribe(
       (words: Word[]) => {
         this.showProgress = false;
         this.words = words;
+
+        //Pagination Setup
+        this.handlePagination(words.length);
+      }
+    )
+
+    this.filterSubject.subscribe(
+      (listSize: number) => {
+        this.handlePagination(listSize);
       }
     )
 
@@ -92,7 +113,7 @@ export class DictionaryComponent implements OnInit, OnDestroy {
       (id: number) => {
 
         this.wordEditItem = this.wordService.getWordItem(id);
-        this.modalData = { title: 'Edit Word', buttonTitle: 'Save', id: id , editItem: this.wordEditItem};
+        this.modalData = { title: this.editWordTitle, buttonTitle: this.saveTitle, id: id , editItem: this.wordEditItem};
         this.showModal = true;
       }
     )
@@ -119,6 +140,23 @@ export class DictionaryComponent implements OnInit, OnDestroy {
     this.filterType = filterData.filter;
   }
 
+  handlePagination(listSize){
+    if (this.currentListSize == listSize){return}
+
+    let paginationSize = Math.ceil(listSize / this.itemsToShow);
+    this.pagination = [];
+    this.page = 1;
+    this.paginationActive = 1;
+    if (paginationSize > 1){
+
+      for (let i=1; i<=paginationSize; i++){
+        this.pagination.push(i);
+      }
+    }
+
+    this.currentListSize = listSize
+  }
+
   openModal(isNew: boolean, title: string, btnTitle: string){
 
     this.modalData = { title: title, buttonTitle: btnTitle , editItem: new Word(0 , '' , '')};
@@ -130,9 +168,12 @@ export class DictionaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.wordChangedSub.unsubscribe();
-    this.openEditModal.unsubscribe();
-    this.serverError.unsubscribe();
-    this.startProgress.unsubscribe();
+    try {
+      this.wordChangedSub.unsubscribe();
+      this.openEditModal.unsubscribe();
+      this.serverError.unsubscribe();
+      this.startProgress.unsubscribe();
+      this.filterSubject.unsubscribe();
+    }catch (e){}
   }
 }

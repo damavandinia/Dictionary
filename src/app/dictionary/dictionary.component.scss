@@ -46,3 +46,20 @@
 .matIndicator{
   display: inline-block;
 }
+
+.paginationBtn{
+  height: 50px;
+  min-width: 50px;
+  line-height: 50px;
+  margin: 0 8px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.paginationBtn.active{
+  cursor: auto;
+}

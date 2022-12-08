@@ -4,17 +4,21 @@
   <div class="matIndicatorWrapper" *ngIf="showProgress"><mat-spinner class="matIndicator" diameter="80"></mat-spinner></div>
   <div class="listWrapper" *ngIf="!showProgress">
 
-    <app-word-item [words]="words | filter:filterTxt:sortType:filterType" [@listAnim]></app-word-item>
+    <app-word-item [words]="words | filter:filterTxt:sortType:filterType:paginationActive:itemsToShow:filterSubject" [@listAnim]></app-word-item>
+
+    <div style="padding-top: 30px">
+      <button *ngFor="let el of pagination" [ngClass]="{'active paginationBackground' : paginationActive == el}" (click)="paginationActive = el" class="paginationBtn cardBackgroundColor titleColor"> {{el}}</button>
+    </div>
 
     <div id="emptyWrapper" class="emptyWrapper">
       <mat-icon>manage_search</mat-icon>
-      <div>Nothing to show!</div>
+      <div i18n>Nothing to show!</div>
     </div>
 
   </div>
 
   <div class="example-button-container addBtn">
-    <button mat-fab color="accent" aria-label="Add New Item" (click)="openModal(true , 'New Word' , 'Add')">
+    <button mat-fab color="accent" i18n-aria-label aria-label="Add New Item" (click)="openModal(true , newWordTitle , addBtnTitle)">
       <mat-icon>add</mat-icon>
     </button>
   </div>
