@@ -1,8 +1,10 @@
 <div class="profileBack mainBackground">
 
+  <app-lang></app-lang>
+
   <div class="profileFormsWrapper cardBackgroundColor">
 
-    <h2 class="profileTitle titleColor">Profile</h2>
+    <h2 class="profileTitle titleColor" i18n>Profile</h2>
 
     <div class="userAvatarImgWrapper">
       <img [src]="userAvatar" *ngIf="userAvatar" class="userAvatarImg">
@@ -10,8 +12,8 @@
 
     <form (ngSubmit)="handleProfileForm(fProfile)" #fProfile="ngForm" class="titleColor">
 
-      <mat-form-field appearance="legacy">
-        <mat-label>Email</mat-label>
+      <mat-form-field appearance="legacy" class="profileInputWrapper">
+        <mat-label i18n>Email</mat-label>
         <input matInput
                type="email"
                required
@@ -23,8 +25,8 @@
         >
       </mat-form-field>
 
-      <mat-form-field appearance="legacy">
-        <mat-label>Username</mat-label>
+      <mat-form-field appearance="legacy" class="profileInputWrapper">
+        <mat-label i18n>Username</mat-label>
         <input matInput
                type="text"
                required
@@ -33,24 +35,24 @@
                ngModel
                [ngModel]="userName"
         >
-        <mat-error *ngIf="usernameInput.invalid">You must enter a value</mat-error>
+        <mat-error *ngIf="usernameInput.invalid" i18n>You must enter a value</mat-error>
       </mat-form-field>
 
       <div class="submitBtn">
         <button mat-raised-button
                 color="accent"
-                [disabled]="!fProfile.valid">Update Profile
+                [disabled]="!fProfile.valid" i18n>Update Profile
         </button>
       </div>
 
     </form>
 
     <div *ngIf="!isLoginWithGoogle">
-      <h2 class="changePassTitle titleColor">Change Password</h2>
+      <h2 class="changePassTitle titleColor" i18n>Change Password</h2>
       <form (ngSubmit)="handlePassForm(fPass)" #fPass="ngForm" class="titleColor">
 
-        <mat-form-field appearance="legacy">
-          <mat-label>New Password</mat-label>
+        <mat-form-field appearance="legacy" class="profileInputWrapper">
+          <mat-label i18n>New Password</mat-label>
           <input matInput
                  type="password"
                  required
@@ -65,7 +67,7 @@
         <div class="submitBtn">
           <button mat-raised-button
                   color="accent"
-                  [disabled]="!fPass.valid">Update Password
+                  [disabled]="!fPass.valid" i18n>Update Password
           </button>
         </div>
 
@@ -74,7 +76,7 @@
 
     <div *ngIf="showProgress" class="modalProgressWrapper">
       <mat-spinner class="modalIndicator" [diameter]="20" color="accent"></mat-spinner>
-      <p>Please Wait...</p>
+      <p i18n>Please Wait...</p>
     </div>
 
   </div>

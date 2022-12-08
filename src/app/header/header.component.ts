@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from "../auth/auth.service";
 import {ThemeService} from "../theme.service";
 import {MatSlideToggleChange} from "@angular/material/slide-toggle";
+import {UserModel} from "../auth/user.model";
 
 @Component({
   selector: 'app-header',
@@ -13,8 +14,11 @@ export class HeaderComponent implements OnInit {
   filterTxt = '';
   sortType = '1';
   filterType = 'All';
+  userAvatar = '/assets/img/avatar.jpg';
+  username = '...';
+  userEmail = '...@...com';
   alphabet = [
-    {value: 'All', viewValue: 'All'},
+    {value: 'All', viewValue: $localize `All`},
     {value: 'A', viewValue: 'A'},
     {value: 'B', viewValue: 'B'},
     {value: 'C', viewValue: 'C'},
@@ -58,10 +62,22 @@ export class HeaderComponent implements OnInit {
     if (isDark){
       this.isDarkTheme = isDark;
     }
+
+    const userData: {
+      email: string,
+      id: string,
+      username?: string,
+      avatar?: string
+    } = JSON.parse(localStorage.getItem('userData'));
+
+    if (userData){
+      if (userData.avatar){this.userAvatar = userData.avatar;}
+      this.username = userData.username;
+      this.userEmail = userData.email;
+    }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   toggleDarkness(event: MatSlideToggleChange){
     this.themeService.toggleDarkMode.next(event.checked);

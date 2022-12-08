@@ -1,5 +1,7 @@
 <div class="topHeader cardBackgroundColor">
-  <img src="/Dictionary/assets/img/color-dictionary2.svg" class="headerLogo" alt="Title">
+  <img src="/assets/img/color-dictionary2.svg" class="headerLogo" alt="Title">
+
+  <app-lang></app-lang>
 
   <button class="headerMenuBtn" mat-icon-button [matMenuTriggerFor]="headerMenu"
            matTooltip="Select a theme!">
@@ -8,19 +10,27 @@
 
   <mat-menu #headerMenu="matMenu" style="padding: 15px; text-align: left; direction: ltr;">
 
+    <div class="menuUserInfoWrapper">
+      <img src="{{ userAvatar }}" class="menuUserInfoAvatar">
+      <div class="menuUserInfo">
+        <div class="menuUserName titleColor">{{ username }}</div>
+        <div class="menuUserEmail">{{ userEmail }}</div>
+      </div>
+    </div>
+
     <button mat-menu-item routerLink="/profile">
       <mat-icon>account_circle</mat-icon>
-      <span>Profile</span>
+      <span i18n class="menuTxt">Profile</span>
     </button>
 
     <button mat-menu-item (click)="logout()">
       <mat-icon>logout</mat-icon>
-      <span>Logout</span>
+      <span i18n class="menuTxt">Logout</span>
     </button>
 
     <button mat-menu-item >
       <mat-icon>dark_mode</mat-icon>
-      <span>Dark Mode</span>
+      <span i18n class="menuTxt">Dark Mode</span>
       <mat-slide-toggle (change)="toggleDarkness($event)" [checked]="isDarkTheme" class="darkModeSwitch"></mat-slide-toggle>
     </button>
 
@@ -30,15 +40,15 @@
 <nav class="header cardBackgroundColor">
 
   <mat-form-field appearance="legacy" class="searchForm titleColor">
-    <mat-label>Search</mat-label>
-    <input matInput id="searchInput" placeholder="Type Something..." type="text" [(ngModel)]="filterTxt" (keyup)="searchWord()">
+    <mat-label i18n>Search</mat-label>
+    <input matInput id="searchInput" placeholder="Type Something..." i18n-placeholder="Type Something..." type="text" [(ngModel)]="filterTxt" (keyup)="searchWord()">
     <mat-icon matSuffix color="primary">search</mat-icon>
   </mat-form-field>
 
   <div class="headerSelectorsWrapper">
 
     <mat-form-field appearance="outline" class="headerSelect">
-      <mat-label>Sort By:</mat-label>
+      <mat-label i18n>Sort By:</mat-label>
       <mat-select [(value)]="sortType" (selectionChange)="searchWord()" >
         <mat-option value="1">A to Z</mat-option>
         <mat-option value="2">Z to A</mat-option>
@@ -46,7 +56,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="headerSelect">
-      <mat-label>Filter By:</mat-label>
+      <mat-label i18n>Filter By:</mat-label>
       <mat-select [(value)]="filterType" (selectionChange)="searchWord()">
         <mat-option *ngFor="let letter of alphabet" [value]="letter.value">
           {{letter.viewValue}}

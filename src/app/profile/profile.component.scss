@@ -20,11 +20,21 @@
   transition: .6s;
 }
 
+.profileFormsWrapper:lang(fa){
+  margin-left: 0;
+  margin-right: 50%;
+  transform: translateX(50%) translateY(-50vh);
+}
+
 .profileTitle{
   font-size: 32px !important;
   line-height: 50px;
   font-weight: bold;
   text-align: center;
+}
+
+.profileTitle:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
 }
 
 .mat-form-field{
@@ -36,9 +46,18 @@
   margin-bottom: 5px;
 }
 
+.changePassTitle:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
+  text-align: right;
+}
+
 .submitBtn{
   text-align: center;
   margin-top: 15px;
+}
+
+.submitBtn > button:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
 }
 
 .modalProgressWrapper{
@@ -73,6 +92,10 @@
   object-fit: cover;
   background-size: cover;
   margin-bottom: 10px;
+}
+
+.profileInputWrapper:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
 }
 
 @media screen and (max-width: 450px){

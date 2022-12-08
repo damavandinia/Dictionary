@@ -2,6 +2,7 @@
   z-index: 19;
   padding-left: 30px;
   padding-top: 20px;
+  text-align: left;
 }
 
 .headerLogo{
@@ -21,6 +22,11 @@
   display: inline-block;
   width: 40%;
   font-size: 18px;
+  direction: ltr;
+}
+
+.searchForm:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
 }
 
 .headerSelectorsWrapper{
@@ -33,9 +39,14 @@
 .headerSelect{
   flex: 1;
   margin: 0 20px;
-  font-size: 12px;
+  font-size: 14px;
   min-width: 80px;
   max-width: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.headerSelect:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
 }
 
 .headerMenuBtn{
@@ -46,9 +57,48 @@
 }
 
 .darkModeSwitch{
-  padding-left: 20px;
+  padding: 0 20px;
 }
 
+.menuTxt:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
+}
+
+.menuUserInfoWrapper{
+  padding: 3px 0;
+}
+
+.menuUserInfoAvatar{
+  display: inline-block;
+  vertical-align: middle;
+  width: 43px;
+  height: 43px;
+  background-size: cover;
+  object-fit: cover;
+  border-radius: 100px;
+  margin: 0 12px;
+}
+
+.menuUserInfo{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.menuUserName{
+  font-weight: bold;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  max-lines: 1;
+}
+
+.menuUserEmail{
+  font-size: 12px;
+  color: #838383;
+  white-space: nowrap;
+  overflow: hidden;
+  max-lines: 1;
+}
 
 @media screen and (max-width: 750px){
 

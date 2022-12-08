@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, NgForm, Validators} from "@angular/forms";
-import {AuthResponseData, AuthService} from "../auth/auth.service";
+import {AuthService} from "../auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Observable} from "rxjs";
-import {UserModel} from "../auth/user.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -22,15 +21,22 @@ export class ProfileComponent implements OnInit {
   usernameInput = new FormControl('', [Validators.required]);
 
   constructor(private authService: AuthService,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,
+              private router: Router) {
+
+    if (this.authService.user.value == null){
+      this.router.navigate(['/login']);
+      return;
+    }
+  }
 
   getPassInputError(){
 
     if (this.newPassword.hasError('required')) {
-      return 'You must enter a password';
+      return $localize `You must enter a password`;
     }
 
-    return this.newPassword.hasError('minLength') ? 'Enter at least 6 characters' : '';
+    return this.newPassword.hasError('minLength') ? $localize `Enter at least 6 characters` : '';
   }
 
   ngOnInit(): void {
@@ -70,14 +76,14 @@ export class ProfileComponent implements OnInit {
     } = JSON.parse(localStorage.getItem('userData'));
 
     if (!userData){
-      this._snackBar.open('An unknown error occurred!', null, {"duration": 4000});
+      this._snackBar.open($localize `An unknown error occurred!`, null, {"duration": 4000});
       return;
     }
 
     userData.username = form.value.usernameInput;
     localStorage.setItem('userData' , JSON.stringify(userData));
 
-    this._snackBar.open('The Username updated successfully.', null, {"duration": 4000});
+    this._snackBar.open($localize `The Username updated successfully.`, null, {"duration": 4000});
   }
 
   handlePassForm(form: NgForm) {
