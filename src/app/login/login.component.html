@@ -1,12 +1,14 @@
 <div class="loginBackground mainBackground"></div>
 
+<app-lang></app-lang>
+
 <div class="loginCard cardBackgroundColor">
 
   <h2 id="loginTitle" class="loginTitle primaryTextColor">{{ title }}</h2>
 
   <form (ngSubmit)="handleLoginForm(fLogin)" #fLogin="ngForm" class="titleColor">
-    <mat-form-field appearance="legacy">
-      <mat-label>Email</mat-label>
+    <mat-form-field appearance="legacy" class="loginInputWrapper">
+      <mat-label i18n>Email</mat-label>
       <input matInput
              type="email"
              required
@@ -18,8 +20,8 @@
 
     </mat-form-field>
 
-    <mat-form-field appearance="legacy">
-      <mat-label>Password</mat-label>
+    <mat-form-field appearance="legacy" class="loginInputWrapper">
+      <mat-label i18n>Password</mat-label>
       <input matInput
              type="password"
              required
@@ -34,21 +36,21 @@
     <div class="modalBtn">
       <button mat-raised-button
               color="accent"
-              [disabled]="!fLogin.valid">{{ isLoginMode ? 'Login' : 'Sign Up' }}</button>
+              [disabled]="!fLogin.valid">{{ isLoginMode ? loginTitle : signUpTitle }}</button>
     </div>
 
   </form>
 
 
   <div class="googleLoginBtn">
-    <button (click)="googleLogin()"><img src="/Dictionary/assets/ic/google.svg" class="googleIc"> {{ isLoginMode ? 'Login' : 'Sign Up' }} With Google Account</button>
+    <button (click)="googleLogin()"><img src="/assets/ic/google.svg" class="googleIc"> {{ isLoginMode ? loginTitle : signUpTitle }} <span i18n> With Google Account</span></button>
   </div>
 
-  <button (click)="switchMode()" class="loginSwitchBtn primaryTextColor">Switch to: <span class="accentTextColor">{{ isLoginMode ? 'Sign Up' : 'Login' }}</span></button>
+  <button (click)="switchMode()" class="loginSwitchBtn primaryTextColor"><span i18n>Switch to:</span> <span class="accentTextColor">{{ isLoginMode ? signUpTitle : loginTitle }}</span></button>
 
   <div *ngIf="showModalProgress" class="modalProgressWrapper">
     <mat-spinner class="modalIndicator" [diameter]="20" color="accent"></mat-spinner>
-    <p>Please Wait...</p>
+    <p i18n>Please Wait...</p>
   </div>
 
 </div>

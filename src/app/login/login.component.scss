@@ -14,6 +14,10 @@
   font-weight: bold;
 }
 
+.loginTitle:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
+}
+
 .loginCard{
   position: fixed;
   z-index: 1000;
@@ -40,6 +44,10 @@
   cursor: pointer;
 }
 
+.loginInputWrapper:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
+}
+
 .modalBtn{
   text-align: center;
 }
@@ -47,6 +55,10 @@
 .modalBtn > button{
   display: inline-block;
   margin-top: 20px;
+}
+
+.modalBtn > button:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
 }
 
 .meaningInput{
@@ -94,11 +106,15 @@
   background: #f1f1f1;
 }
 
+.googleLoginBtn > button:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
+}
+
 .googleIc{
   height: 18px;
   display: inline-block;
   vertical-align: middle;
-  padding-right: 5px;
+  padding: 0 5px;
   margin-top: -2px;
 }
 
@@ -108,6 +124,10 @@
   font-size: 14px;
   cursor: pointer;
   margin-top: 20px;
+}
+
+.loginSwitchBtn:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
 }
 
 .loginSwitchBtn > span{

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, NgForm, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -13,7 +13,10 @@ import { timer } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  title = "Login";
+
+  loginTitle = $localize `Login`;
+  signUpTitle = $localize `Sign Up`;
+  title = this.loginTitle;
   isLoginMode = true;
 
   showModalProgress = false;
@@ -30,18 +33,18 @@ export class LoginComponent implements OnInit {
   getEmailInputError(){
 
     if (this.email.hasError('required')) {
-      return 'You must enter a email';
+      return $localize `You must enter a email`;
     }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.email.hasError('email') ? $localize `Not a valid email` : '';
   }
 
   getPassInputError(){
     if (this.email.hasError('required')) {
-      return 'You must enter a password';
+      return $localize `You must enter a password`;
     }
 
-    return this.password.hasError('minLength') ? 'Enter at least 6 characters' : '';
+    return this.password.hasError('minLength') ? $localize `Enter at least 6 characters` : '';
   }
 
   handleLoginForm(form: NgForm) {
@@ -96,14 +99,14 @@ export class LoginComponent implements OnInit {
     if (this.isLoginMode){
       document.getElementById("loginTitle").style.transform = 'rotateX(90deg)';
       timer(300).subscribe(x => {
-        this.title = 'Sign Up'
+        this.title = this.signUpTitle;
         document.getElementById("loginTitle").style.transform = 'rotateX(0)';
       })
 
     }else {
       document.getElementById("loginTitle").style.transform = 'rotateX(90deg)';
       timer(300).subscribe(x => {
-        this.title = 'Login'
+        this.title = this.loginTitle;
         document.getElementById("loginTitle").style.transform = 'rotateX(0)';
       })
     }
