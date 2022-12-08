@@ -3,7 +3,6 @@ import {Word} from "./word.model";
 import {WordListService} from "../word-list.service";
 import {MatSnackBar, TextOnlySnackBar} from "@angular/material/snack-bar";
 import {MatSnackBarRef} from '@angular/material/snack-bar';
-import {DataSource} from "@angular/cdk/collections";
 
 @Component({
   selector: 'app-word-item',
@@ -32,7 +31,7 @@ export class WordItemComponent implements OnInit {
     this.reservedItem = this.wordService.getWordItem(id);
 
     this.wordService.deleteWordFromServer(id).subscribe(response => {
-      this.openSnackBar('Item was deleted.' , 'Undo');
+      this.openSnackBar($localize `Item was deleted.` , 'Undo');
       this.wordService.fetchWords();
     } , error => {
       this.wordService.serverError.next(error.error.error);

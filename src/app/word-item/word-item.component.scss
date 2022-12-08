@@ -14,12 +14,24 @@
   align-items: center;
 }
 
+.wordsTable{
+  width: 97%;
+  text-align: left;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
+}
+
+.wordsTable:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
+  text-align: right;
+}
+
 .mainWord{
   flex: 1;
   font-size: 30px;
   color: #37383a;
   font-weight: bold;
   text-align: left;
+  font-family: Roboto !important;
 }
 
 .meaningWord{
@@ -30,6 +42,11 @@
   font-family: Vazirmatn;
   text-align: right;
   margin-right: 30px;
+}
+
+.meaningWord:lang(fa){
+  margin-right: 0;
+  margin-left: 30px;
 }
 
 .ltrWord{
@@ -82,9 +99,21 @@
   width: 100px;
 }
 
+.optionTitle:lang(fa){
+  text-align: left;
+}
+
 .tableOptionWrapper{
   text-align: right;
   width: 100px;
+}
+
+.tableOptionWrapper:lang(fa){
+  text-align: left;
+}
+
+.wordTableMenuBtn:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
 }
 
 @media screen and (max-width: 500px){
@@ -122,5 +151,10 @@
   .meaningWord{
     margin-top: 10px;
     margin-right: 10px;
+  }
+
+  .meaningWord:lang(fa){
+    margin-right: 0;
+    margin-left: 10px;
   }
 }

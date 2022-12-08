@@ -30,6 +30,11 @@
   .titleColor{
     color: #2a3031;
   }
+
+  .paginationBackground{
+    color: #e2e2e2 !important;
+    background: #2a3031 !important;
+  }
 }
 
 @mixin define-css-classes-dark($theme) {
@@ -43,6 +48,10 @@
 
   .primaryTextColor{
     color: mat-color($primary, 300);
+  }
+
+  .primaryBackgroundColor{
+    background: mat-color($primary, 300);
   }
 
   .accentTextColor{
@@ -59,6 +68,11 @@
 
   .titleColor{
     color: #ffffff;
+  }
+
+  .paginationBackground{
+    color: #2a3031 !important;
+    background: #e3e3e3 !important;
   }
 }
 

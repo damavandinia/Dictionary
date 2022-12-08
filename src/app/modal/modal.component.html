@@ -3,11 +3,11 @@
 
   <mat-icon class="closeIc" color="accent" (click)="closeModal()">close</mat-icon>
 
-  <h2 class="primaryTextColor">{{ modalData.title }}</h2>
+  <h2 class="modalTitle primaryTextColor">{{ modalData.title }}</h2>
 
   <form (ngSubmit)="handleModalForm(f)" #f="ngForm" class="titleColor">
-    <mat-form-field appearance="legacy">
-      <mat-label>English Word</mat-label>
+    <mat-form-field appearance="legacy" class="modalInputWrapper" style="text-align: left; direction: ltr;">
+      <mat-label i18n>English Word</mat-label>
       <input matInput
              type="text"
              required
@@ -17,13 +17,13 @@
              ngModel
              [ngModel]="modalData.editItem.englishWord"
       >
-      <mat-error *ngIf="enWord.invalid && !wordError">Please enter a word</mat-error>
-      <mat-error *ngIf="wordError">This word is already saved!</mat-error>
+      <mat-error *ngIf="enWord.invalid && !wordError" i18n>Please enter a word</mat-error>
+      <mat-error *ngIf="wordError" i18n>This word is already saved!</mat-error>
 
     </mat-form-field>
 
-    <mat-form-field appearance="legacy">
-      <mat-label>Meaning</mat-label>
+    <mat-form-field appearance="legacy" class="modalInputWrapper">
+      <mat-label i18n>Meaning</mat-label>
       <input matInput
              type="text"
              required
@@ -33,7 +33,7 @@
              ngModel
              [ngModel]="modalData.editItem.persianWord"
       >
-      <mat-error *ngIf="prWord.invalid">Please enter a word</mat-error>
+      <mat-error *ngIf="prWord.invalid" i18n>Please enter a word</mat-error>
     </mat-form-field>
 
     <div class="modalBtn">
@@ -46,7 +46,7 @@
 
   <div *ngIf="showModalProgress" class="modalProgressWrapper">
     <mat-spinner class="modalIndicator" [diameter]="20" color="accent"></mat-spinner>
-    <p>Sending...</p>
+    <p i18n>Sending...</p>
   </div>
 
 </div>

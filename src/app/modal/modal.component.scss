@@ -29,6 +29,10 @@
   font-size: 22px;
 }
 
+.modalTitle:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
+}
+
 .closeIc{
   position: absolute;
   right: 20px;
@@ -38,6 +42,10 @@
 
 .modalBtn{
   text-align: center;
+}
+
+.modalBtn > button:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
 }
 
 .modalBtn > button{
@@ -68,6 +76,10 @@
   vertical-align: middle;
   font-size: 14px;
   color: #868686;
+}
+
+.modalInputWrapper:lang(fa){
+  font-family: Vazirmatn, "Helvetica Neue", sans-serif;
 }
 
 

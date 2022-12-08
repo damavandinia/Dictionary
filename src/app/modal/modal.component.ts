@@ -27,6 +27,10 @@ export class ModalComponent implements OnInit, AfterViewChecked {
 
   wordError = false;
 
+  addBtnTitle = $localize `Add`;
+  saveTitle = $localize `Save`;
+  unknownErrorMessage = $localize `An unknown error occurred!`;
+
   constructor(private wordService: WordListService) { }
 
   ngOnInit(): void {}
@@ -44,7 +48,7 @@ export class ModalComponent implements OnInit, AfterViewChecked {
 
     this.showModalProgress = true;
 
-    if (this.modalData.buttonTitle === 'Add'){
+    if (this.modalData.buttonTitle === this.addBtnTitle){
 
       if (this.wordService.checkDuplicateWord(wordItem)){
         form.controls['enWord'].setErrors({required: true, incorrect: true});
@@ -63,13 +67,13 @@ export class ModalComponent implements OnInit, AfterViewChecked {
         this.showModalProgress = false;
 
         if (!error.error || !error.error.error){
-          this.wordService.serverError.next('An unknown error occurred!');
+          this.wordService.serverError.next(this.unknownErrorMessage);
         }else {
           this.wordService.serverError.next(error.error.error);
         }
       });
 
-    }else if (this.modalData.buttonTitle === 'Save'){
+    }else if (this.modalData.buttonTitle === this.saveTitle){
 
       this.wordService.editWordOnServer(this.modalData.id , wordItem).subscribe(response => {
         this.showModalProgress = false;
@@ -79,7 +83,7 @@ export class ModalComponent implements OnInit, AfterViewChecked {
       } , error => {
         this.showModalProgress = false;
         if (!error.error || !error.error.error){
-          this.wordService.serverError.next('An unknown error occurred!');
+          this.wordService.serverError.next(this.unknownErrorMessage);
         }else {
           this.wordService.serverError.next(error.error.error);
         }

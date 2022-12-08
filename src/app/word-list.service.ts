@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Word} from "./word-item/word.model";
-import {exhaustMap, Subject, take} from "rxjs";
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {Subject} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {AuthService} from "./auth/auth.service";
-import * as constants from "constants";
 
 @Injectable({
   providedIn: 'root',
@@ -82,6 +81,10 @@ export class WordListService {
   }
 
   fetchWords(){
+
+    // this.setWords(this.words);
+    // return;
+
     this.startProgress.next(null);
 
     this.http.get<Word[]>('https://dictionary-90a42-default-rtdb.firebaseio.com/'+this.getUserId()+'/words.json')
