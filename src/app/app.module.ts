@@ -26,6 +26,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {ProfileComponent} from "./profile/profile.component";
 import {MatTableModule} from "@angular/material/table";
+import {LangComponent} from "./lang/lang.component";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCazdiRoo9M2hfSRaSGgDZ3hghtYeRrM4M",
@@ -46,7 +47,8 @@ const firebaseConfig = {
     FilterPipe,
     ModalComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    LangComponent
   ],
     imports: [
         BrowserModule,

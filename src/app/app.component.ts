@@ -1,8 +1,9 @@
-import {Component, OnInit, HostBinding, OnDestroy} from '@angular/core';
+import {Component, OnInit, HostBinding, OnDestroy, Inject, LOCALE_ID} from '@angular/core';
 import {AuthService} from "./auth/auth.service";
 import {OverlayContainer} from "@angular/cdk/overlay";
 import {ThemeService} from "./theme.service";
 import {Subscription} from "rxjs";
+import {Title} from "@angular/platform-browser";
 
 const THEME_DARKNESS_SUFFIX = `-dark`;
 
@@ -20,7 +21,11 @@ export class AppComponent implements OnInit, OnDestroy{
 
   constructor(private authService: AuthService,
               private overlayContainer: OverlayContainer,
-              private themeService: ThemeService) {
+              private themeService: ThemeService,
+              @Inject(LOCALE_ID) private locale: string,
+              private titleService: Title) {
+
+    this.titleService.setTitle($localize`Dictionary`);
 
     // if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     //   this.isThemeDark = true;
@@ -34,6 +39,8 @@ export class AppComponent implements OnInit, OnDestroy{
         this.setTheme(this.currentTheme, mode);
       }
     )
+
+    localStorage.setItem("lang" , locale); // Default Language
   }
 
   ngOnInit(): void {
