@@ -1,0 +1,22 @@
+
+<button class="langMenuBtn titleColor" mat-icon-button [matMenuTriggerFor]="langMenu">
+  <mat-icon class="auto-flip" color="accent">arrow_drop_down</mat-icon> {{ getCurrentLanguage() }}
+</button>
+
+<mat-menu #langMenu="matMenu" xPosition="before">
+
+  <a href="/en/{{getCurrentRoute()}}" class="langBtn">
+    <button mat-menu-item style="direction: ltr; text-align: left;">
+      <img src="/assets/img/usa.png" class="langMenuFlag">
+      <span><span style="font-weight: bold">EN</span> English</span>
+    </button>
+  </a>
+
+  <a href="/fa/{{getCurrentRoute()}}" class="langBtn">
+    <button mat-menu-item style="direction: ltr; text-align: left;">
+      <img src="/assets/img/iran.png" class="langMenuFlag">
+      <span> <span style="font-weight: bold">FA</span> <span style="font-family: Vazirmatn; padding: 0 5px;">فارسی</span></span>
+    </button>
+  </a>
+
+</mat-menu>
