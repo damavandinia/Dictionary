@@ -1,0 +1,19 @@
+ RewriteEngine on
+        RewriteBase /
+        RewriteRule ^/en/index\.html$ - [L]
+
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+	 RewriteRule (..) $1/index.html [L]
+
+        RewriteCond %{HTTP:Accept-Language} ^fa [NC]
+        RewriteRule ^$ /fa/ [R]
+
+	 RewriteCond %{HTTP:Accept-Language} ^en [NC]
+        RewriteRule ^$ /en/ [R]
+
+        RewriteCond %{HTTP:Accept-Language} !^fa [NC]
+        RewriteRule ^$ /en/ [R]
+
+	RewriteCond ^/assets [NC]
+         RewriteRule /en/$1 [R]
