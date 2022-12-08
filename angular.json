@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "translator": {
+      "i18n": {
+        "sourceLocale": "en",
+        "locales": {
+          "fa": "src/locale/messages.fa.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +23,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "docs",
+            "localize": ["fa"],
+            "outputPath": "dist/translator",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
