@@ -5,14 +5,14 @@
 
 <mat-menu #langMenu="matMenu" xPosition="before">
 
-  <a href="/Dictionary/en/{{getCurrentRoute()}}" class="langBtn">
+  <a href="/Dictionary/en{{getCurrentRoute()}}" class="langBtn">
     <button mat-menu-item style="direction: ltr; text-align: left;">
       <img src="/Dictionary/assets/img/usa.png" class="langMenuFlag">
       <span><span style="font-weight: bold">EN</span> English</span>
     </button>
   </a>
 
-  <a href="/Dictionary/fa/{{getCurrentRoute()}}" class="langBtn">
+  <a href="/Dictionary/fa{{getCurrentRoute()}}" class="langBtn">
     <button mat-menu-item style="direction: ltr; text-align: left;">
       <img src="/Dictionary/assets/img/iran.png" class="langMenuFlag">
       <span> <span style="font-weight: bold">FA</span> <span style="font-family: Vazirmatn; padding: 0 5px;">فارسی</span></span>
