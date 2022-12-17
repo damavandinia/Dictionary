@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   filterTxt = '';
   sortType = '1';
   filterType = 'All';
-  userAvatar = '/assets/img/avatar.jpg';
+  userAvatar = '/Dictionary/assets/img/avatar.jpg';
   username = '...';
   userEmail = '...@...com';
   alphabet = [
