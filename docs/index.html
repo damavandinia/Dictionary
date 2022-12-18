@@ -17,8 +17,9 @@
     pathname = pathname.split( '/' );
 
     if (pathname[2] == 'en'){
-
-
+      if (pathname[3] != null){
+        window.location.replace("https://damavandinia.github.io/Dictionary/en/"+"?page_name="+pathname[3]);
+      }
     }else if (pathname[2] == 'fa') {
       if (pathname[3] != null){
         window.location.replace("https://damavandinia.github.io/Dictionary/fa/"+"?page_name="+pathname[3]);
