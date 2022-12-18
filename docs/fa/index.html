@@ -16,7 +16,7 @@
       get: (searchParams, prop) => searchParams.get(prop),
     });
     if (params.page_name != null){
-      window.location.replace("https://damavandinia.github.io/Dictionary/fa/"+params.page_name);
+      history.pushState({page: this.href}, '', "https://damavandinia.github.io/Dictionary/fa/"+params.page_name);
     }
   </script>
 <script src="runtime.9889d78dac570e16.js" type="module"></script><script src="polyfills.6ef8c0597110a42e.js" type="module"></script><script src="main.7216629b79549277.js" type="module"></script>
