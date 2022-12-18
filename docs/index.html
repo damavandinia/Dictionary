@@ -16,18 +16,13 @@
     let pathname = new URL(url).pathname;
     pathname = pathname.split( '/' );
 
-    console.log(pathname);
-
     if (pathname[2] == 'en'){
-      console.log('redirect EN');
-      setTimeout(function () {
-        window.location.replace("https://damavandinia.github.io/Dictionary/en/");
-      }, 4000);
+
+
     }else if (pathname[2] == 'fa') {
-      console.log('redirect FA');
-      setTimeout(function () {
-        window.location.replace("https://damavandinia.github.io/Dictionary/fa/");
-      }, 4000);
+      if (pathname[3] != null){
+        window.location.replace("https://damavandinia.github.io/Dictionary/fa/"+"?page_name="+pathname[3]);
+      }
     }
   </script>
 <script src="runtime.9889d78dac570e16.js" type="module"></script><script src="polyfills.6ef8c0597110a42e.js" type="module"></script><script src="main.7216629b79549277.js" type="module"></script>
